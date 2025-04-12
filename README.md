@@ -34,13 +34,14 @@ import (
 	"github.com/jackc/pgx/v5"
 
 	pgxprotobuftimestamppb "github.com/bcook98/pgx-protobuf-well-known/pkg/timestamppb"
+	pgxprotobufstringvalue "github.com/bcook98/pgx-protobuf-well-known/pkg/stringvalue"
 )
 
 myPool.AfterConnect = func(ctx context.Context, conn *pgx.Conn) error {
-	// Timestamp - TIMESTAMP
-	pgxprotobuftimestamppb.RegisterTimestamp(conn.TypeMap())
-	// Timestamp - TIMESTAMPTZ
-	pgxprotobuftimestamppb.RegisterTimestamptz(conn.TypeMap())
+	// Timestamp - TIMESTAMP/TIMESTAMPTZ
+	pgxprotobuftimestamppb.Register(conn.TypeMap())
+	// StringValue - TEXT/VARCHAR
+	pgxprotobufstringvalue.Register(conn.TypeMap())
 }
 ```
 
