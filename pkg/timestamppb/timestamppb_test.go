@@ -35,6 +35,12 @@ func TestNull(t *testing.T) {
 				var ts timestamppb.Timestamp
 				err := conn.QueryRow(context.Background(), fmt.Sprintf(`select null::%s`, typ)).Scan(&ts)
 				require.EqualError(t, err, `can't scan into dest[0]: cannot scan NULL into *timestamppb.Timestamp`)
+
+				var tsPtrIn *timestamppb.Timestamp
+				var tsPtrOut *timestamppb.Timestamp
+				err = conn.QueryRow(context.Background(), fmt.Sprintf(`select $1::%s`, typ), tsPtrIn).Scan(&tsPtrOut)
+				require.NoError(t, err)
+				require.Nil(t, tsPtrOut)
 			})
 		})
 	}

@@ -34,6 +34,12 @@ func TestNull(t *testing.T) {
 				var s wrapperspb.StringValue
 				err := conn.QueryRow(context.Background(), fmt.Sprintf(`select null::%s`, typ)).Scan(&s)
 				require.EqualError(t, err, `can't scan into dest[0]: cannot scan NULL into *wrapperspb.StringValue`)
+
+				var sPtrIn *wrapperspb.StringValue
+				var sPtrOut *wrapperspb.StringValue
+				err = conn.QueryRow(context.Background(), fmt.Sprintf(`select $1::%s`, typ), sPtrIn).Scan(&sPtrOut)
+				require.NoError(t, err)
+				require.Nil(t, sPtrOut)
 			})
 		})
 	}
