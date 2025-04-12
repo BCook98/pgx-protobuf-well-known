@@ -1,11 +1,13 @@
-module github.com/jackc/pgx-shopspring-decimal
+module github.com/bcook98/pgx-protobuf-well-known
 
-go 1.17
+go 1.21
+
+toolchain go1.24.0
 
 require (
 	github.com/jackc/pgx/v5 v5.0.0-alpha.1.0.20220402215505-8cf6721d6672
-	github.com/shopspring/decimal v1.3.1
 	github.com/stretchr/testify v1.7.0
+	google.golang.org/protobuf v1.36.5
 )
 
 require (

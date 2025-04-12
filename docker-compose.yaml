@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      - POSTGRES_PASSWORD=pgx_protobuf_well_known
+      - POSTGRES_DB=pgx_protobuf_well_known
+      - POSTGRES_USER=pgx_protobuf_well_known
+    ports:
+      - 5432:5432
